@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BC236C8282D758E00346D8B /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC236C7282D758E00346D8B /* CartViewController.swift */; };
+		8BC236CF282D819800346D8B /* CartTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC236CD282D819800346D8B /* CartTotalTableViewCell.swift */; };
+		8BC236D0282D819800346D8B /* CartTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BC236CE282D819800346D8B /* CartTotalTableViewCell.xib */; };
 		8BC93016282C27E700D66A1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC93015282C27E700D66A1D /* AppDelegate.swift */; };
 		8BC93018282C27E700D66A1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC93017282C27E700D66A1D /* SceneDelegate.swift */; };
 		8BC9301A282C27E700D66A1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC93019282C27E700D66A1D /* ViewController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8BC236C7282D758E00346D8B /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		8BC236CD282D819800346D8B /* CartTotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTotalTableViewCell.swift; sourceTree = "<group>"; };
+		8BC236CE282D819800346D8B /* CartTotalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTotalTableViewCell.xib; sourceTree = "<group>"; };
 		8BC93012282C27E700D66A1D /* ShopAppProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopAppProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC93015282C27E700D66A1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC93017282C27E700D66A1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				8BC93019282C27E700D66A1D /* ViewController.swift */,
+				8BC236C7282D758E00346D8B /* CartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -112,6 +119,8 @@
 			children = (
 				8BC93038282C3F0500D66A1D /* ProductTableViewCell.swift */,
 				8BC93039282C3F0500D66A1D /* ProductTableViewCell.xib */,
+				8BC236CD282D819800346D8B /* CartTotalTableViewCell.swift */,
+				8BC236CE282D819800346D8B /* CartTotalTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -199,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC236D0282D819800346D8B /* CartTotalTableViewCell.xib in Resources */,
 				8BC93022282C27E800D66A1D /* LaunchScreen.storyboard in Resources */,
 				8BC9303B282C3F0500D66A1D /* ProductTableViewCell.xib in Resources */,
 				8BC9301F282C27E800D66A1D /* Assets.xcassets in Resources */,
@@ -220,6 +230,8 @@
 				8BC93033282C2DC500D66A1D /* ProductModel.swift in Sources */,
 				8BC93018282C27E700D66A1D /* SceneDelegate.swift in Sources */,
 				8BC9303F282C47CF00D66A1D /* ProductViewModel.swift in Sources */,
+				8BC236C8282D758E00346D8B /* CartViewController.swift in Sources */,
+				8BC236CF282D819800346D8B /* CartTotalTableViewCell.swift in Sources */,
 				8BC9303A282C3F0500D66A1D /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +386,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -401,6 +414,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
