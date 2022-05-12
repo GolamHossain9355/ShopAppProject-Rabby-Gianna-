@@ -51,8 +51,15 @@ class NetwordService {
     }
     
     func getImage(imageUrl: String, completion: @escaping (Data) -> Void) {
+        
+        func defaultData() -> Void {
+            completion(self.defaultImageData)
+            self.cache.setObject(self.defaultImage!, forKey: imageUrl as NSString)
+        }
+        
         guard let url = URL(string: imageUrl) else {
             print("Invalid Image Url")
+            defaultData()
             return
         }
         
@@ -67,20 +74,14 @@ class NetwordService {
                 
                 guard let data = data, error == nil else {
                     print("Invalid image data")
-                    
-                    completion(self.defaultImageData)
-                    self.cache.setObject(self.defaultImage!, forKey: imageUrl as NSString)
-                    
+                    defaultData()
                     return
                 }
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     print("Invalid status code")
-                    
-                    completion(self.defaultImageData)
-                    self.cache.setObject(self.defaultImage!, forKey: imageUrl as NSString)
-                    
+                    defaultData()
                     return
                 }
                 
