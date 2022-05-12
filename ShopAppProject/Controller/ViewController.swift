@@ -13,9 +13,12 @@ class ViewController: UIViewController {
     
     var productViewModel = ProductViewModel()
     
+    var cellsChosen = [ProductCellViewModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         productTableView.dataSource = self
+        productTableView.delegate = self
         productTableView.register(ProductTableViewCell.getNib(), forCellReuseIdentifier: ProductTableViewCell.identifier)
         productViewModel.fetchdata {
             DispatchQueue.main.async {
@@ -24,6 +27,10 @@ class ViewController: UIViewController {
         }
     }
 
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//    }
+    
     deinit {
         print("ViewController Deinitialized")
     }
@@ -45,6 +52,34 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-    
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
+        if cellsChosen.count > 0 {
+            print(cellsChosen[cellsChosen.count - 1].price)
+        }
+        
+        let cvm = productViewModel.getCellVM(indexPath)
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let addToCart = UIAlertAction(title: "Add To Cart", style: .default) {
+            action in
+            self.cellsChosen.append(cvm)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
+            action in
+            print(action)
+        }
+        
+        alert.addAction(addToCart)
+        alert.addAction(cancel)
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
