@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol BuyHandler {
+    var cellsAddedToCart: [ProductCellViewModel] { get set }
+    var savedCells: [ProductCellViewModel] { get set }
+    func removeCell(_ indexPath: IndexPath)
+    func addCells(cells: [ProductCellViewModel])
+}
 
-
-class ViewController: UIViewController {
+class ViewController: UIViewController, BuyHandler {
     
     @IBOutlet weak var productTableView: UITableView!
     
@@ -31,6 +36,14 @@ class ViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
+    }
+    
+    func removeCell(_ indexPath: IndexPath) {
+        self.cellsAddedToCart.remove(at: indexPath.row)
+    }
+    
+    func addCells(cells: [ProductCellViewModel]) {
+        self.savedCells.append(contentsOf: cells)
     }
     
     deinit {
@@ -59,9 +72,6 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-       if cellsAddedToCart.count > 0 {
-           print(cellsAddedToCart[cellsAddedToCart.count - 1].price)
-        }
         
         let cvm = productViewModel.getCellVM(indexPath)
         
