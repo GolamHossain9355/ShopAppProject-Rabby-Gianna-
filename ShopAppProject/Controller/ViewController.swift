@@ -7,15 +7,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol BuyHandler {
+    var cellsAddedToCart: [ProductCellViewModel] { get set }
+    var savedCells: [ProductCellViewModel] { get set }
+    func removeCell(_ indexPath: IndexPath)
+    func addCells(cells: [ProductCellViewModel])
+}
+
+class ViewController: UIViewController, BuyHandler {
     
     @IBOutlet weak var productTableView: UITableView!
     
     var productViewModel = ProductViewModel()
+    var cellsAddedToCart = [ProductCellViewModel]()
+    var savedCells = [ProductCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         productTableView.dataSource = self
+        productTableView.delegate = self
         productTableView.register(ProductTableViewCell.getNib(), forCellReuseIdentifier: ProductTableViewCell.identifier)
         productViewModel.fetchdata {
             DispatchQueue.main.async {
@@ -24,6 +34,18 @@ class ViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    }
+    
+    func removeCell(_ indexPath: IndexPath) {
+        self.cellsAddedToCart.remove(at: indexPath.row)
+    }
+    
+    func addCells(cells: [ProductCellViewModel]) {
+        self.savedCells.append(contentsOf: cells)
+    }
+    
     deinit {
         print("ViewController Deinitialized")
     }
@@ -45,6 +67,30 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-    
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
+        let cvm = productViewModel.getCellVM(indexPath)
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let addToCart = UIAlertAction(title: "Add To Cart", style: .default) {
+            action in
+            self.cellsAddedToCart.append(cvm)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
+            action in
+            print("Item was not added to Cart")
+        }
+        
+        alert.addAction(addToCart)
+        alert.addAction(cancel)
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
