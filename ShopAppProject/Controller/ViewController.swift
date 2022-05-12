@@ -7,13 +7,15 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var productTableView: UITableView!
     
     var productViewModel = ProductViewModel()
-    
-    var cellsChosen = [ProductCellViewModel]()
+    var cellsAddedToCart = [ProductCellViewModel]()
+    var savedCells = [ProductCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,9 +59,8 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        
-        if cellsChosen.count > 0 {
-            print(cellsChosen[cellsChosen.count - 1].price)
+       if cellsAddedToCart.count > 0 {
+           print(cellsAddedToCart[cellsAddedToCart.count - 1].price)
         }
         
         let cvm = productViewModel.getCellVM(indexPath)
@@ -67,11 +68,11 @@ extension ViewController: UITableViewDelegate {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let addToCart = UIAlertAction(title: "Add To Cart", style: .default) {
             action in
-            self.cellsChosen.append(cvm)
+            self.cellsAddedToCart.append(cvm)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
             action in
-            print(action)
+            print("Item was not added to Cart")
         }
         
         alert.addAction(addToCart)
