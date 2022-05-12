@@ -13,7 +13,7 @@ class CartViewController: UIViewController {
    
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]() {
         didSet {
-            cartTableView.reloadData()
+
         }
     }
     
@@ -25,13 +25,18 @@ class CartViewController: UIViewController {
         return total
     }
     
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         print("in cart")
         cartTableView.dataSource = self
         cartTableView.register(ProductTableViewCell.getNib(), forCellReuseIdentifier: ProductTableViewCell.identifier)
         cartTableView.register(CartTotalTableViewCell.getNib(), forCellReuseIdentifier: CartTotalTableViewCell.identifier)
+        
+        if cartItems.count > 0 {
+            DispatchQueue.main.async {
+                self.cartTableView.reloadData()
+            }
+        }
     }
     
     

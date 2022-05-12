@@ -8,8 +8,6 @@
 import UIKit
 
 protocol BuyHandler {
-    var cellsAddedToCart: [ProductCellViewModel] { get set }
-    var savedCells: [ProductCellViewModel] { get set }
     func removeCell(_ indexPath: IndexPath)
     func addCells(cells: [ProductCellViewModel])
 }
@@ -35,7 +33,8 @@ class ViewController: UIViewController, BuyHandler {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        let cartVC = segue.destination as? CartViewController
+        cartVC?.cartItems = self.cellsAddedToCart
     }
     
     func removeCell(_ indexPath: IndexPath) {
