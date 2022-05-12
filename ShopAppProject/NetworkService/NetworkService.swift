@@ -15,8 +15,12 @@ class NetwordService {
     static let shared = NetwordService()
     
     let cache = NSCache<NSString, UIImage>()
+    let defaultImage = UIImage(named: "imageNotFoundAsset")
+    var defaultImageData: Data {
+        self.defaultImage!.pngData()!
+    }
     
-    func getData(completion: @escaping ([Makeup]) -> Void) {
+    func getData(completion: @escaping ([Product]) -> Void) {
         guard let url = URL(string: makupStr) else {
             print("Invalid Url")
             return
@@ -37,7 +41,7 @@ class NetwordService {
             }
             
             do {
-                let model = try JSONDecoder().decode([Makeup].self, from: data)
+                let model = try JSONDecoder().decode([Product].self, from: data)
                 completion(model)
             } catch {
                 print("Error occured while getting data")
@@ -47,12 +51,20 @@ class NetwordService {
     }
     
     func getImage(imageUrl: String, completion: @escaping (Data) -> Void) {
+        
+        func defaultData() -> Void {
+            completion(self.defaultImageData)
+            self.cache.setObject(self.defaultImage!, forKey: imageUrl as NSString)
+        }
+        
         guard let url = URL(string: imageUrl) else {
             print("Invalid Image Url")
+            defaultData()
             return
         }
         
         if let image = cache.object(forKey: imageUrl as NSString), let imageData = image.pngData() {
+            print("Caching image from memory")
             completion(imageData)
             return
         }
@@ -62,12 +74,14 @@ class NetwordService {
                 
                 guard let data = data, error == nil else {
                     print("Invalid image data")
+                    defaultData()
                     return
                 }
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     print("Invalid status code")
+                    defaultData()
                     return
                 }
                 

@@ -8,10 +8,10 @@
 import Foundation
 
 
-struct Makeup: Decodable {
-    let brandName: String
+struct Product: Decodable {
+    let brandName: String?
     let itemName: String
-    let price: String
+    let price: String?
     let imageUrl: String
     
     enum CodingKeys: String, CodingKey {
