@@ -10,6 +10,12 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartTableView: UITableView!
    
+    @IBAction func buyProducts(_ sender: UIButton) {
+        self.buyHandlerDelegate?.addCells(cells: cartItems)
+        self.cartItems = [ProductCellViewModel]()
+        self.cartTableView.reloadData()
+        self.buyHandlerDelegate?.clearCells()
+    }
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
     var buyHandlerDelegate: BuyHandler?
     
@@ -64,7 +70,7 @@ extension CartViewController: UITableViewDataSource {
 }
 
 extension CartViewController: UITableViewDelegate {
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)  {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)  {
         if editingStyle == .delete {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let delete = UIAlertAction(title: "Delete", style: .default) {
@@ -87,4 +93,11 @@ extension CartViewController: UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            if indexPath.row < cartItems.count {
+                return true
+            }
+            return false
+        }
 }
