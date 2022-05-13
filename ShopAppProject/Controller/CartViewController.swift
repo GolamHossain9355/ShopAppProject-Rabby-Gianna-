@@ -11,11 +11,9 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartTableView: UITableView!
    
-    var cartItems: [ProductCellViewModel] = [ProductCellViewModel]() {
-        didSet {
-
-        }
-    }
+    var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
+    var buyHandlerDelegate: BuyHandler?
+    
     
     var cartTotal: Double {
         var total = 0.0
@@ -27,7 +25,6 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        print("in cart")
         cartTableView.dataSource = self
         cartTableView.register(ProductTableViewCell.getNib(), forCellReuseIdentifier: ProductTableViewCell.identifier)
         cartTableView.register(CartTotalTableViewCell.getNib(), forCellReuseIdentifier: CartTotalTableViewCell.identifier)
@@ -65,4 +62,30 @@ extension CartViewController: UITableViewDataSource {
     }
     
     
+}
+
+extension CartViewController: UITableViewDelegate {
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)  {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let delete = UIAlertAction(title: "Delete", style: .default) {
+                action in
+                self.cartItems.remove(at: indexPath.row)
+                self.cartTableView.deleteRows(at: [indexPath], with: .fade)
+                self.cartTableView.reloadData()
+                self.buyHandlerDelegate?.removeCell(indexPath)
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
+                action in
+                print("Item was not deleted")
+            }
+            
+            alert.addAction(delete)
+            alert.addAction(cancel)
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
 }
