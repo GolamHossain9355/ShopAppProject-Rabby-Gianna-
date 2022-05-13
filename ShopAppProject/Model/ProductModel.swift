@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Product: Decodable {
     let brandName: String?
     let itemName: String
@@ -20,4 +19,10 @@ struct Product: Decodable {
         case price
         case imageUrl = "image_link"
     }
+}
+
+enum AlertKeys: String {
+    case addToCart = "Add To Cart"
+    case cancel = "Cancel"
+    case delete = "Delete"
 }

@@ -73,14 +73,14 @@ extension CartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)  {
         if editingStyle == .delete {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let delete = UIAlertAction(title: "Delete", style: .default) {
+            let delete = UIAlertAction(title: AlertKeys.delete.rawValue, style: .default) {
                 action in
                 self.cartItems.remove(at: indexPath.row)
                 self.cartTableView.deleteRows(at: [indexPath], with: .fade)
                 self.cartTableView.reloadData()
                 self.buyHandlerDelegate?.removeCell(indexPath)
             }
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
+            let cancel = UIAlertAction(title: AlertKeys.cancel.rawValue, style: .cancel) {
                 action in
                 print("Item was not deleted")
             }
