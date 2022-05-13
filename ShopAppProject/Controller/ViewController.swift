@@ -35,6 +35,7 @@ class ViewController: UIViewController, BuyHandler {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cartVC = segue.destination as? CartViewController
         cartVC?.cartItems = self.cellsAddedToCart
+        cartVC?.buyHandlerDelegate = self
     }
     
     func removeCell(_ indexPath: IndexPath) {
