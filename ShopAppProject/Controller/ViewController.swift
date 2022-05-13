@@ -10,6 +10,7 @@ import UIKit
 protocol BuyHandler {
     func removeCell(_ indexPath: IndexPath)
     func addCells(cells: [ProductCellViewModel])
+    func clearCells()
 }
 
 class ViewController: UIViewController, BuyHandler {
@@ -36,6 +37,10 @@ class ViewController: UIViewController, BuyHandler {
         let cartVC = segue.destination as? CartViewController
         cartVC?.cartItems = self.cellsAddedToCart
         cartVC?.buyHandlerDelegate = self
+    }
+    
+    func clearCells() {
+        self.cellsAddedToCart = [ProductCellViewModel]()
     }
     
     func removeCell(_ indexPath: IndexPath) {

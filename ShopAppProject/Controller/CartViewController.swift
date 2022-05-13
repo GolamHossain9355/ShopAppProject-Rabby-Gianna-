@@ -11,6 +11,12 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartTableView: UITableView!
    
+    @IBAction func buyProducts(_ sender: UIButton) {
+        self.buyHandlerDelegate?.addCells(cells: cartItems)
+        self.cartItems = [ProductCellViewModel]()
+        self.cartTableView.reloadData()
+        self.buyHandlerDelegate?.clearCells()
+    }
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
     var buyHandlerDelegate: BuyHandler?
     
