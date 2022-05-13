@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//buy button delegates "Saved Items" back to product view controller
 
 class CartViewController: UIViewController {
     @IBOutlet weak var cartTableView: UITableView!
@@ -48,6 +47,7 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //basically when the index is at the end of cartitems, we add a new cell to there for total
         if indexPath.row == cartItems.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CartTotalTableViewCell.identifier, for: indexPath) as? CartTotalTableViewCell else {
                 return UITableViewCell()
@@ -63,6 +63,5 @@ extension CartViewController: UITableViewDataSource {
         cell.configure(cellVM: cvm)
         return cell
     }
-    
     
 }
