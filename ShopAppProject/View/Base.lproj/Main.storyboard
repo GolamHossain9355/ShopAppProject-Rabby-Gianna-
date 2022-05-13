@@ -80,6 +80,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cartButtonImage" destination="vuS-Ez-ofI" id="OhH-8e-75w"/>
                         <outlet property="productTableView" destination="YI6-j2-psu" id="Zg3-c4-kBx"/>
                     </connections>
                 </viewController>
