@@ -17,9 +17,16 @@ protocol BuyHandler {
 class ViewController: UIViewController, BuyHandler {
     
     @IBOutlet weak var productTableView: UITableView!
+    @IBOutlet weak var cartButtonImage: UIBarButtonItem!
     
     var productViewModel = ProductViewModel()
-    var cellsAddedToCart = [ProductCellViewModel]()
+    var cellsAddedToCart = [ProductCellViewModel]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.cartButtonImage.image = self.cellsAddedToCart.isEmpty ? UIImage(systemName: "cart") : UIImage(systemName: "cart.fill")
+            }
+        }
+    }
     var savedCells = [ProductCellViewModel]()
     
     override func viewDidLoad() {
