@@ -22,6 +22,7 @@
 		8BC9303B282C3F0500D66A1D /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BC93039282C3F0500D66A1D /* ProductTableViewCell.xib */; };
 		8BC9303D282C435600D66A1D /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9303C282C435500D66A1D /* ProductCellViewModel.swift */; };
 		8BC9303F282C47CF00D66A1D /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9303E282C47CF00D66A1D /* ProductViewModel.swift */; };
+		8BC93043282EF6A800D66A1D /* SavedProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC93042282EF6A800D66A1D /* SavedProductsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		8BC93039282C3F0500D66A1D /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		8BC9303C282C435500D66A1D /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		8BC9303E282C47CF00D66A1D /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		8BC93042282EF6A800D66A1D /* SavedProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			children = (
 				8BC93019282C27E700D66A1D /* ViewController.swift */,
 				8BC236C7282D758E00346D8B /* CartViewController.swift */,
+				8BC93042282EF6A800D66A1D /* SavedProductsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				8BC9301A282C27E700D66A1D /* ViewController.swift in Sources */,
 				8BC93016282C27E700D66A1D /* AppDelegate.swift in Sources */,
 				8BC9303D282C435600D66A1D /* ProductCellViewModel.swift in Sources */,
+				8BC93043282EF6A800D66A1D /* SavedProductsViewController.swift in Sources */,
 				8BC93031282C294400D66A1D /* NetworkService.swift in Sources */,
 				8BC93033282C2DC500D66A1D /* ProductModel.swift in Sources */,
 				8BC93018282C27E700D66A1D /* SceneDelegate.swift in Sources */,

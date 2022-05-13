@@ -11,6 +11,7 @@ protocol BuyHandler {
     func removeCell(_ indexPath: IndexPath)
     func addCells(cells: [ProductCellViewModel])
     func clearCells()
+    func removeSavedCells()
 }
 
 class ViewController: UIViewController, BuyHandler {
@@ -37,6 +38,10 @@ class ViewController: UIViewController, BuyHandler {
         let cartVC = segue.destination as? CartViewController
         cartVC?.cartItems = self.cellsAddedToCart
         cartVC?.buyHandlerDelegate = self
+        
+        let savedCellVC = segue.destination as? SavedProductsViewController
+        savedCellVC?.savedCells = self.savedCells
+        savedCellVC?.savedCellsDelegate = self
     }
     
     func clearCells() {
@@ -49,6 +54,10 @@ class ViewController: UIViewController, BuyHandler {
     
     func addCells(cells: [ProductCellViewModel]) {
         self.savedCells.append(contentsOf: cells)
+    }
+    
+    func removeSavedCells() {
+        self.savedCells.removeAll()
     }
     
     deinit {
