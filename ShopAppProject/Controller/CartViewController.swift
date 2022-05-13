@@ -18,14 +18,9 @@ class CartViewController: UIViewController {
     }
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
     var buyHandlerDelegate: BuyHandler?
-    
-    
+    var cartViewModel: CartViewModel = CartViewModel()
     var cartTotal: Double {
-        var total = 0.0
-        for item in cartItems {
-            total += Double(item.price) ?? 0
-        }
-        return total
+        cartViewModel.calculateTotal(productCells: cartItems)
     }
     
     override func viewDidLoad(){
@@ -33,7 +28,6 @@ class CartViewController: UIViewController {
         cartTableView.dataSource = self
         cartTableView.register(ProductTableViewCell.getNib(), forCellReuseIdentifier: ProductTableViewCell.identifier)
         cartTableView.register(CartTotalTableViewCell.getNib(), forCellReuseIdentifier: CartTotalTableViewCell.identifier)
-        
         if cartItems.count > 0 {
             DispatchQueue.main.async {
                 self.cartTableView.reloadData()
