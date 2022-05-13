@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="66K-OF-PXF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="66K-OF-PXF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,14 +11,35 @@
         <!--Saved Products-->
         <scene sceneID="K9X-Id-aWG">
             <objects>
-                <viewController id="RkO-nZ-oX8" sceneMemberID="viewController">
+                <viewController id="RkO-nZ-oX8" customClass="SavedProductsViewController" customModule="ShopAppProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wIF-Qd-Mei">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="T4V-sg-Bqi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dVU-20-fds"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="T4V-sg-Bqi" firstAttribute="top" secondItem="dVU-20-fds" secondAttribute="top" id="GLk-P4-9vV"/>
+                            <constraint firstItem="dVU-20-fds" firstAttribute="bottom" secondItem="T4V-sg-Bqi" secondAttribute="bottom" id="PGO-R6-XPB"/>
+                            <constraint firstItem="T4V-sg-Bqi" firstAttribute="leading" secondItem="dVU-20-fds" secondAttribute="leading" id="WkW-Oa-8xn"/>
+                            <constraint firstItem="dVU-20-fds" firstAttribute="trailing" secondItem="T4V-sg-Bqi" secondAttribute="trailing" id="xoo-7U-hfV"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Saved Products" id="fSL-TN-ryY"/>
+                    <navigationItem key="navigationItem" title="Saved Products" id="fSL-TN-ryY">
+                        <barButtonItem key="rightBarButtonItem" image="x.circle" catalog="system" id="Sz7-GD-2SS">
+                            <connections>
+                                <action selector="clearCellsButton:" destination="RkO-nZ-oX8" id="cC9-PH-jlL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="savedCellsTableView" destination="T4V-sg-Bqi" id="21z-mM-l8K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aa0-gB-bqw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,6 +152,7 @@
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="folder" catalog="system" width="128" height="97"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
