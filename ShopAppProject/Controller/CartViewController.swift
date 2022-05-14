@@ -15,14 +15,19 @@ class CartViewController: UIViewController {
         self.cartItems = [ProductCellViewModel]()
         self.cartTableView.reloadData()
         self.buyHandlerDelegate?.clearCells()
+        self.makeLabel()
     }
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
     var buyHandlerDelegate: BuyHandler?
-    var cartViewModel: CartViewModel = CartViewModel()
-    var cartTotal: Double {
-        cartViewModel.calculateTotal(productCells: cartItems)
-    }
     
+    func makeLabel() {
+        self.cartTableView.isHidden = true
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+        label.textAlignment = .center
+        label.text = "Purchase successful!"
+        self.view.addSubview(label)
+    }
     override func viewDidLoad(){
         super.viewDidLoad()
         cartTableView.dataSource = self
@@ -49,7 +54,7 @@ extension CartViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CartTotalTableViewCell.identifier, for: indexPath) as? CartTotalTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(price: self.cartTotal)
+            cell.configure(price: CartViewModel().calculateTotal(productCells: cartItems))
             return cell
         }
         
