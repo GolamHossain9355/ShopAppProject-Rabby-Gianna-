@@ -93,21 +93,13 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        
+
         let cvm = productViewModel.getCellVM(indexPath)
+        let alert = productViewModel.showAlert()
         
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let addToCart = UIAlertAction(title: "Add To Cart", style: .default) {
-            action in
+        productViewModel.updateCart = {
             self.cellsAddedToCart.append(cvm)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) {
-            action in
-            print("Item was not added to Cart")
-        }
-        
-        alert.addAction(addToCart)
-        alert.addAction(cancel)
         
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
