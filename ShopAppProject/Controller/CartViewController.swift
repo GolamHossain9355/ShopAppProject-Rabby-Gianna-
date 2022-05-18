@@ -19,6 +19,11 @@ class CartViewController: UIViewController {
     }
     var cartItems: [ProductCellViewModel] = [ProductCellViewModel]()
     var buyHandlerDelegate: BuyHandler?
+    var cartViewModel = CartViewModel()
+    
+    func setUpTotalLabel() {
+        
+    }
     
     func makeLabel() {
         self.cartTableView.isHidden = true
@@ -27,7 +32,9 @@ class CartViewController: UIViewController {
         label.textAlignment = .center
         label.text = "Purchase successful!"
         self.view.addSubview(label)
+        self.setUpTotalLabel()
     }
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         cartTableView.dataSource = self
@@ -43,6 +50,7 @@ class CartViewController: UIViewController {
     
 }
 
+
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cartItems.count + 1
@@ -54,7 +62,7 @@ extension CartViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CartTotalTableViewCell.identifier, for: indexPath) as? CartTotalTableViewCell else {
                 return UITableViewCell()
             }
-            cell.configure(price: CartViewModel().calculateTotal(productCells: cartItems))
+            cell.configure(price: cartViewModel.calculateTotal(productCells: cartItems))
             return cell
         }
         
@@ -70,26 +78,19 @@ extension CartViewController: UITableViewDataSource {
 
 extension CartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)  {
-        if editingStyle == .delete {
-            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let delete = UIAlertAction(title: AlertKeys.delete.rawValue, style: .default) {
-                action in
-                self.cartItems.remove(at: indexPath.row)
-                self.cartTableView.deleteRows(at: [indexPath], with: .fade)
-                self.cartTableView.reloadData()
-                self.buyHandlerDelegate?.removeCell(indexPath)
-            }
-            let cancel = UIAlertAction(title: AlertKeys.cancel.rawValue, style: .cancel) {
-                action in
-                print("Item was not deleted")
-            }
-            
-            alert.addAction(delete)
-            alert.addAction(cancel)
-            
-            DispatchQueue.main.async {
-                self.present(alert, animated: true, completion: nil)
-            }
+        
+        
+        self.cartViewModel.updateTableView = {
+            self.cartItems.remove(at: indexPath.row)
+            self.cartTableView.deleteRows(at: [indexPath], with: .fade)
+            self.buyHandlerDelegate?.removeCell(indexPath)
+            self.cartTableView.reloadData()
+        }
+        
+        let alert = self.cartViewModel.showAlert()
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -100,3 +101,4 @@ extension CartViewController: UITableViewDelegate {
             return false
         }
 }
+
